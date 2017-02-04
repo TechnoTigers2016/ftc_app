@@ -91,6 +91,8 @@ public class AutoBlueTeam_Sensor extends LinearOpMode {
 //    static final double     BEACON_USPOS           = Servo.MAX_POSITION;
     static final double     BEACON_THEMPOS           = 0.1;
     static final double     BEACON_USPOS           = 0.9;
+    static final double     PARTICLE_PUSHPOS        = 0.3;
+    static final double     PARTICLE_PULLPOS        = 0.95;
 
     @Override
     public void runOpMode() {
@@ -125,6 +127,8 @@ public class AutoBlueTeam_Sensor extends LinearOpMode {
         robot.frontRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         robot.backLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         robot.backRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        robot.leftServo.setPosition(Servo.MAX_POSITION); //Home position
+        robot.rightServo.setPosition(Servo.MAX_POSITION); //Home position
 
         //Calibrate Gyro sensor before starting
         calibrateGyro();
@@ -140,6 +144,11 @@ public class AutoBlueTeam_Sensor extends LinearOpMode {
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
 
+        robot.flyLeft.setDirection(DcMotor.Direction.REVERSE);
+        robot.flyLeft.setPower(1);
+        robot.flyRight.setDirection(DcMotor.Direction.FORWARD);
+        robot.flyRight.setPower(1);
+
         // Step through each leg of the path,
         // Note: Reverse movement is obtained by setting a negative distance (not speed)
         // This is for the nearest blue beacon towards our robot
@@ -148,6 +157,27 @@ public class AutoBlueTeam_Sensor extends LinearOpMode {
         encoderDrive(DRIVE_SPEED, 22, 22, 10.0); // Drive fwd
         telemetry.addData("Step 1 GyroDrive", " Completed");
         telemetry.update();
+//        sleep(250);
+        gyroTurn(TURN_SPEED, -20.0);
+        robot.armServo.setPosition(PARTICLE_PUSHPOS);
+        sleep(1000);
+        robot.flyLeft.setPower(0);
+        robot.flyRight.setPower(0);
+        robot.armServo.setPosition(PARTICLE_PULLPOS);
+        //gyroTurn(TURN_SPEED, 0.0);
+        //Step 2
+        gyroTurn( TURN_SPEED, -55.0);         // Turn  CCW to -55 Degrees
+        telemetry.addData("Step 2 GyroTurn", " Completed");
+        telemetry.update();
+
+//        // Step through each leg of the path,
+//        // Note: Reverse movement is obtained by setting a negative distance (not speed)
+//        // This is for the nearest blue beacon towards our robot
+//        //Step 1
+////        gyroDrive(DRIVE_SPEED, 24.0, 0.0);    // Drive FWD
+//        encoderDrive(DRIVE_SPEED, 22, 22, 10.0); // Drive fwd
+//        telemetry.addData("Step 1 GyroDrive", " Completed");
+//        telemetry.update();
 //        sleep(250);
 
         //Step 2
@@ -187,7 +217,7 @@ public class AutoBlueTeam_Sensor extends LinearOpMode {
 //        telemetry.update();
 //        sleep(2000);
 
-        //encoderDrive(DRIVE_SPEED, 4, 4, 3.0);
+        encoderDrive(DRIVE_SPEED, 3, 3, 3.0);
         telemetry.addData("Before Color sense", "loop");
         telemetry.update();
 //        sleep(1000);
@@ -204,7 +234,7 @@ public class AutoBlueTeam_Sensor extends LinearOpMode {
             telemetry.addData("Detecting", "Blue in IF");
 //            sleep(2000);
             robot.beaconServo.setPosition(BEACON_USPOS);
-            encoderDrive(PUSH_SPEED, 4,4, 3.0);
+            encoderDrive(PUSH_SPEED, 6,6, 3.0);
         } else {
             colorBlueSensed = 0;
             telemetry.addData("Detecting", "Neither in IF");
@@ -293,8 +323,8 @@ public class AutoBlueTeam_Sensor extends LinearOpMode {
         encoderDrive(DRIVE_SPEED, 6,-6,3.0);
         encoderDrive(DRIVE_SPEED,  -24, -24, 3.0); // Back up and park
        // gyroTurn(TURN_SPEED, -75.0);
-        encoderDrive(DRIVE_SPEED,-9,6,3.0);
-        encoderDrive(DRIVE_SPEED,  -18, -18, 3.0); // Back up and park
+        encoderDrive(DRIVE_SPEED,-12,6,3.0);
+        encoderDrive(DRIVE_SPEED,  -35, -10, 3.0); // Back up and park
         telemetry.addData("Path", "Complete");
         telemetry.update();
     }

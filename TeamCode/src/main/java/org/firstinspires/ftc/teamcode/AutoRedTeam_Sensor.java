@@ -126,6 +126,8 @@ public class AutoRedTeam_Sensor extends LinearOpMode {
         robot.frontRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         robot.backLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         robot.backRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        robot.leftServo.setPosition(Servo.MAX_POSITION); //Home position
+        robot.rightServo.setPosition(Servo.MAX_POSITION); //Home position
 
         //Calibrate Gyro sensor before starting
         calibrateGyro();
@@ -151,19 +153,19 @@ public class AutoRedTeam_Sensor extends LinearOpMode {
         // This is for the nearest blue beacon towards our robot
         //Step 1
 //        gyroDrive(DRIVE_SPEED, 24.0, 0.0);    // Drive FWD
-        encoderDrive(DRIVE_SPEED, 22, 22, 10.0); // Drive fwd
+        encoderDrive(DRIVE_SPEED, 20, 20, 10.0); // Drive fwd
         telemetry.addData("Step 1 GyroDrive", " Completed");
         telemetry.update();
 //        sleep(250);
-
+        gyroTurn(TURN_SPEED, -10.0);
         robot.armServo.setPosition(PARTICLE_PUSHPOS);
-        robot.armServo.setPosition(PARTICLE_PULLPOS);
         sleep(1000);
         robot.flyLeft.setPower(0);
         robot.flyRight.setPower(0);
-
-
+        robot.armServo.setPosition(PARTICLE_PULLPOS);
+        //gyroTurn(TURN_SPEED, 0.0);
         //Step 2
+        encoderDrive(PUSH_SPEED, 5, 5, 10.0); // Drive fwd
         gyroTurn( TURN_SPEED, 55.0);         // Turn  CCW to -55 Degrees
         telemetry.addData("Step 2 GyroTurn", " Completed");
         telemetry.update();
