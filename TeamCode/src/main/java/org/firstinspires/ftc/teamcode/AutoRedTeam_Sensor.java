@@ -51,6 +51,25 @@ import com.qualcomm.robotcore.util.Range;
  *  This code ALSO requires that the drive Motors have been configured such that a positive
  *  power command moves them forwards, and causes the encoders to count UP.
  *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
  *   The desired path in this example s:
  *   - Drive forward for 48 inches
  *   - Spin right for 12 Inches
@@ -89,8 +108,8 @@ public class AutoRedTeam_Sensor extends LinearOpMode {
     static final double     P_DRIVE_COEFF           = 0.15;     // Larger is more responsive, but also less stable
 //    static final double     BEACON_THEMPOS           = Servo.MIN_POSITION;
 //    static final double     BEACON_USPOS           = Servo.MAX_POSITION;
-    static final double     BEACON_THEMPOS           = 0.1;
-    static final double     BEACON_USPOS           = 0.9;
+    static final double     BEACON_THEMPOS           = 0.01;
+    static final double     BEACON_USPOS           = 0.99;
     static final double     PARTICLE_PUSHPOS        = 0.3;
     static final double     PARTICLE_PULLPOS        = 0.95;
     @Override
@@ -202,13 +221,13 @@ public class AutoRedTeam_Sensor extends LinearOpMode {
             telemetry.addData("Detecting", "Red in IF");
 //            sleep(2000);
             robot.beaconServo.setPosition(BEACON_THEMPOS);
-            encoderDrive(PUSH_SPEED,    4,4,3.0);
+            encoderDrive(PUSH_SPEED,    6,6,3.0);
         } else if (robot.color.red() > robot.color.blue()){
             colorBlueSensed = 2;
             telemetry.addData("Detecting", "Blue in IF");
 //            sleep(2000);
             robot.beaconServo.setPosition(BEACON_USPOS);
-            encoderDrive(PUSH_SPEED, 4,4, 3.0);
+            encoderDrive(PUSH_SPEED, 6,6, 3.0);
         } else {
             colorBlueSensed = 0;
             telemetry.addData("Detecting", "Neither in IF");
@@ -244,7 +263,7 @@ public class AutoRedTeam_Sensor extends LinearOpMode {
         }
         telemetry.addData("First Color sense loop", "completed");
         telemetry.update();
-        sleep(5000);
+       // sleep(5000);
 
         //Look for the second beacon
 //        encoderDrive(DRIVE_SPEED, -5,-5, 3.0);
@@ -300,8 +319,8 @@ public class AutoRedTeam_Sensor extends LinearOpMode {
         encoderDrive(DRIVE_SPEED,-6,6,3.0);
         encoderDrive(DRIVE_SPEED,  -22, -22, 3.0); // Back up and park
   //      gyroTurn(TURN_SPEED, 75.0);
-        encoderDrive(DRIVE_SPEED,6,-9,3.0);
-        encoderDrive(DRIVE_SPEED,  -18, -18, 3.0); // Back up and park
+        encoderDrive(DRIVE_SPEED,8,-11,3.0);
+        encoderDrive(DRIVE_SPEED,  -20, -20, 3.0); // Back up and park
         telemetry.addData("Path", "Complete");
         telemetry.update();
     }

@@ -89,8 +89,8 @@ public class AutoBlueTeam_Sensor extends LinearOpMode {
     static final double     P_DRIVE_COEFF           = 0.15;     // Larger is more responsive, but also less stable
 //    static final double     BEACON_THEMPOS           = Servo.MIN_POSITION;
 //    static final double     BEACON_USPOS           = Servo.MAX_POSITION;
-    static final double     BEACON_THEMPOS           = 0.1;
-    static final double     BEACON_USPOS           = 0.9;
+    static final double     BEACON_THEMPOS           = 0.01;
+    static final double     BEACON_USPOS           = 0.99;
     static final double     PARTICLE_PUSHPOS        = 0.3;
     static final double     PARTICLE_PULLPOS        = 0.95;
 
@@ -148,6 +148,9 @@ public class AutoBlueTeam_Sensor extends LinearOpMode {
         robot.flyLeft.setPower(1);
         robot.flyRight.setDirection(DcMotor.Direction.FORWARD);
         robot.flyRight.setPower(1);
+
+        robot.leftServo.setPosition(Servo.MAX_POSITION);
+        robot.rightServo.setPosition(Servo.MAX_POSITION);
 
         // Step through each leg of the path,
         // Note: Reverse movement is obtained by setting a negative distance (not speed)
@@ -228,7 +231,7 @@ public class AutoBlueTeam_Sensor extends LinearOpMode {
             telemetry.addData("Detecting", "Red in IF");
 //            sleep(2000);
             robot.beaconServo.setPosition(BEACON_THEMPOS);
-            encoderDrive(PUSH_SPEED,    4,4,3.0);
+            encoderDrive(PUSH_SPEED,    7,7,3.0);
         } else if (robot.color.blue() > robot.color.red()){
             colorBlueSensed = 2;
             telemetry.addData("Detecting", "Blue in IF");

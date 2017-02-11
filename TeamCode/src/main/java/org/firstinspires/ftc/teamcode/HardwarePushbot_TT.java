@@ -137,7 +137,7 @@ public class HardwarePushbot_TT
 
         leftServo.setPosition(Servo.MAX_POSITION);
         rightServo.setPosition(Servo.MAX_POSITION);
-        beaconServo.setPosition(0.1);
+        beaconServo.setPosition(0.01);
         armServo.setPosition(0.95);
     }
 
