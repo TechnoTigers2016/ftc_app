@@ -116,7 +116,7 @@ public class AutoRight_1 extends LinearOpMode {
         telemetry.update();
 
         // Wait for the game to start (driver presses PLAY)
-        
+
         waitForStart();
 
         // Step through each leg of the path,
@@ -134,7 +134,7 @@ public class AutoRight_1 extends LinearOpMode {
         //robot.leftClaw.setPosition(1.0);            // S4: Stop and close the claw.
         //robot.rightClaw.setPosition(0.0);
         sleep(1000);     // pause for servos to move
-
+//lol
         telemetry.addData("Path", "Complete");
         telemetry.update();
     }
