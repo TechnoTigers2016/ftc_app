@@ -116,6 +116,7 @@ public class AutoRight_1 extends LinearOpMode {
         telemetry.update();
 
         // Wait for the game to start (driver presses PLAY)
+        
         waitForStart();
 
         // Step through each leg of the path,
