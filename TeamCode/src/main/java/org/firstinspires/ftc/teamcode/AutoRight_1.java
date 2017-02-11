@@ -41,6 +41,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 /**
  * This file illustrates the concept of driving a path based on encoder counts.
  * It uses the common Pushbot hardware class to define the drive on the robot.
+ *
  * The code is structured as a LinearOpMode
  *
  * The code REQUIRES that you DO have encoders on the wheels,
